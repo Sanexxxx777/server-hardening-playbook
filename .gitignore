@@ -1,0 +1,9 @@
+# never commit secrets or local cruft
+.env
+.env.*
+*.key
+*.pem
+secrets/
+*.bak
+*.bak_*
+.DS_Store

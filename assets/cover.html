@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1280px; height:640px; overflow:hidden; }
+  body {
+    background:#0a0d0a;
+    background-image:
+      radial-gradient(ellipse 900px 500px at 78% 30%, rgba(63,185,80,.10), transparent 70%),
+      linear-gradient(0deg, rgba(255,255,255,.015) 1px, transparent 1px);
+    background-size: auto, 100% 3px;
+    font-family:'SF Mono','Menlo','DejaVu Sans Mono',monospace;
+    color:#c9d1c9;
+    display:flex; align-items:center;
+    padding:0 72px;
+    position:relative;
+  }
+  /* scanline vignette */
+  body::after{ content:''; position:absolute; inset:0;
+    box-shadow: inset 0 0 220px rgba(0,0,0,.75); pointer-events:none; }
+
+  .left { width:560px; z-index:2; }
+  .tag { font-size:15px; letter-spacing:5px; color:#3fb950; opacity:.85; margin-bottom:26px; }
+  h1 { font-size:62px; line-height:1.02; font-weight:800; letter-spacing:-1px; color:#f0f6f0; }
+  h1 .amber{ color:#d29922; }
+  .rule { width:96px; height:3px; background:#3fb950; margin:28px 0 24px; }
+  .slogan { font-size:24px; color:#8b949e; letter-spacing:1px; }
+  .slogan b{ color:#3fb950; font-weight:600; }
+  .meta { margin-top:52px; font-size:15px; color:#6e7681; letter-spacing:.5px; }
+  .meta .k{ color:#c9d1c9; }
+
+  /* terminal panel */
+  .term { position:absolute; right:64px; top:96px; width:520px; height:448px;
+    background:#0d120d; border:1px solid #21301f; border-radius:10px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(63,185,80,.06);
+    overflow:hidden; z-index:1; }
+  .bar { height:38px; background:#0f160f; border-bottom:1px solid #21301f;
+    display:flex; align-items:center; padding:0 16px; gap:8px; }
+  .dot{ width:11px; height:11px; border-radius:50%; }
+  .r{background:#e06c5b}.y{background:#d9a441}.g{background:#4aa564}
+  .bar .t{ margin-left:12px; font-size:13px; color:#6e7681; }
+  .body { padding:20px 22px; font-size:15.5px; line-height:1.95; }
+  .p { color:#5a6b58; }
+  .c { color:#3fb950; }
+  .a { color:#d29922; }
+  .w { color:#c9d1c9; }
+  .dim{ color:#54604f; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <div class="tag">DEFENSIVE · LINUX · PRODUCTION</div>
+    <h1>Server<br>Hardening<br><span class="amber">Playbook</span></h1>
+    <div class="rule"></div>
+    <div class="slogan"><b>failure</b> → <b>fix</b> → <b>verify</b></div>
+    <div class="meta"><span class="k">Aleksandr NFA</span> &nbsp;·&nbsp; github.com/Sanexxxx777</div>
+  </div>
+
+  <div class="term">
+    <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="t">audit-listeners.sh</span></div>
+    <div class="body">
+      <div><span class="p">$</span> <span class="w">./audit-listeners.sh</span></div>
+      <div><span class="c">✓</span> <span class="dim">ssh password auth</span> <span class="w">disabled</span></div>
+      <div><span class="c">✓</span> <span class="dim">firewall policy</span> <span class="w">default-deny</span></div>
+      <div><span class="c">✓</span> <span class="dim">services bound</span> <span class="w">127.0.0.1</span></div>
+      <div><span class="c">✓</span> <span class="dim">remote desktop</span> <span class="w">tunnel-only</span></div>
+      <div><span class="c">✓</span> <span class="dim">redis</span> <span class="w">requires auth</span></div>
+      <div><span class="c">✓</span> <span class="dim">no secrets in git</span></div>
+      <div><span class="a">!</span> <span class="dim">surface baseline</span> <span class="a">review</span></div>
+      <div class="dim">&nbsp;</div>
+      <div><span class="p">$</span> <span class="w">_</span></div>
+    </div>
+  </div>
+</body>
+</html>
