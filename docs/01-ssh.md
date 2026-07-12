@@ -37,6 +37,15 @@ sshd -T | grep -iE 'passwordauthentication|permitrootlogin|pubkeyauthentication'
 ```
 
 > **Gotcha — drop-in ordering.** `sshd` reads config files in alphanumeric order and the *first* setting wins. A hardening file at `/etc/ssh/sshd_config.d/99-hardening.conf` can be silently overridden by an earlier `50-cloud-init.conf` that re-enables passwords. Always confirm the *effective* value with `sshd -T`, not just what you wrote in your file.
+>
+> **Gotcha — cloud-init regenerates the file on reboot.** Even if you edit or delete `50-cloud-init.conf`, cloud-init rewrites it on the next boot from its own config, quietly re-enabling passwords. To make the fix durable, also tell cloud-init to stop managing SSH password auth:
+>
+> ```bash
+> # /etc/cloud/cloud.cfg.d/99-disable-ssh-pwauth.cfg
+> ssh_pwauth: false
+> ```
+>
+> This is a common trap on freshly-provisioned VPS images: the hardening looked applied, but a reboot silently undid it. Re-check `sshd -T | grep '^passwordauthentication'` *after* the first reboot, not just after applying.
 
 ## Verify
 

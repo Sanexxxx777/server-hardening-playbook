@@ -42,7 +42,25 @@ Wire the diff into a cron job that pings you (email, a bot, a webhook) when it's
 - **Firewall rule count** — a sudden drop can mean rules were flushed.
 - **SSH config drift** — `sshd -T | grep passwordauthentication` should stay `no`.
 - **New authorized_keys** — an added key you didn't add is a red flag.
+- **New successful SSH logins** — alert on the first login from an IP you haven't seen before.
 - **Unexpected cron jobs** and outbound connections.
+
+### Make login alerts actionable — mark your own keys
+
+A "new SSH login" alert is only useful if you can tell *your* login from an intruder's in one glance. If you log in from a mobile connection, your source IP changes constantly — alerting on every new IP trains you to ignore the alerts (alert fatigue), and a real intrusion hides in the noise.
+
+The fix: don't key the alert on the IP, key it on the **key fingerprint**. Keep a small allowlist of the SSH key fingerprints you actually use, and have the alert label each login against it:
+
+```bash
+# Your legitimate key fingerprints, one per line: "SHA256:... human-readable name"
+# stored at e.g. /var/lib/sentinel/known_keys
+
+# When a login fires, pull its fingerprint from the auth log and look it up:
+keyfp=$(grep -aoE 'SHA256:[A-Za-z0-9+/]+' <<<"$log_line")
+name=$(awk -v fp="$keyfp" '$1==fp{$1="";sub(/^ +/,"");print;exit}' /var/lib/sentinel/known_keys)
+```
+
+Then the alert reads **"known key — laptop, just a new IP"** (benign) or **"key NOT in the allowlist / login by *password*"** (alarm — check `authorized_keys` now). A roaming IP stops being an alert; an unknown key stays one. Password logins should never appear once you've disabled them (Section 1) — if one does, that's the loudest signal on the list.
 
 ## Verify
 
