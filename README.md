@@ -85,4 +85,4 @@ MIT — see [LICENSE](LICENSE). Use it, fork it, ship it.
 
 ---
 
-Maintained by **Aleksandr Shulgin** · GitHub [@Sanexxxx777](https://github.com/Sanexxxx777)
+Maintained by **Aleksandr Shulgin ([@Aleksandr_NFA](https://t.me/Aleksandr_NFA))** · GitHub [@Sanexxxx777](https://github.com/Sanexxxx777)
