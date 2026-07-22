@@ -1,5 +1,16 @@
 # Server Hardening Playbook
 
+<!-- TODO: demo GIF (20-40s) -->
+
+<details>
+<summary>🇷🇺 Кратко на русском</summary>
+
+Практический чек-лист для укрепления защиты production Linux-сервера — каждый пункт по схеме **проблема → как исправить → как проверить**. Покрывает SSH, firewall, привязку сервисов к интерфейсам, секреты, аутентификацию БД и остальное. Полный текст — на английском ниже.
+
+⚠️ Применяйте команды осознанно и сначала проверяйте не на боевом сервере — некоторые шаги (например отключение пароля SSH) могут заблокировать доступ, если сделаны не по порядку.
+
+</details>
+
 A practical, battle-tested checklist for locking down a production Linux server — written after learning some of these lessons the hard way.
 
 Most "hardening guides" are either a wall of `sysctl` flags nobody applies, or a vendor benchmark you skim once and forget. This one is different: every item here maps to a **real way servers get owned** — an exposed port, a weak remote-desktop password, a secret in git, a database with no auth — and gives you the exact command to close it, plus how to *verify* it actually closed.
@@ -33,6 +44,8 @@ git log -p | grep -iE 'api[_-]?key|secret|password|private[_-]?key|token' | head
 ```
 
 Anything that comes back "wrong" above has a dedicated section below.
+
+> ⚠️ **Apply consciously, test before prod.** These are real commands that change what's reachable on a live box — some (disabling SSH password auth, tightening firewall defaults) can lock you out if applied out of order. Confirm key-based login works *before* disabling passwords, and try unfamiliar steps on a disposable/staging box first, not directly on production.
 
 ---
 
