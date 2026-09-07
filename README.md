@@ -64,6 +64,7 @@ Anything that comes back "wrong" above has a dedicated section below.
 | 9 | [Incident response basics](docs/09-incident-response.md) | Making a breach worse while reacting to it |
 | 10 | [Change discipline](docs/10-change-discipline.md) | Breaking prod while trying to secure it |
 | 11 | [Integrity sentinel](docs/11-integrity-sentinel.md) | Persistence sitting in plain sight for days |
+| 12 | [Supply chain](docs/12-supply-chain.md) | Install-time code execution — the hole you open yourself |
 
 There's a condensed one-page version in [CHECKLIST.md](CHECKLIST.md).
 

@@ -9,6 +9,14 @@ One page. Print it, run it on a new box, run it again quarterly on old ones. Eac
 - [ ] `fail2ban` installed and watching sshd · [§1](docs/01-ssh.md)
 - [ ] No shared root private keys between hosts (forced-command users instead) · [§1](docs/01-ssh.md)
 
+## Supply chain
+- [ ] Installs use **wheels only + exact version** — `pip install --only-binary=:all: pkg==X.Y.Z` (source builds execute `setup.py` at install time) · [§12](docs/12-supply-chain.md)
+- [ ] New dependency checked for provenance before install: publisher, first-release date, real usage (typo- and slopsquatting) · [§12](docs/12-supply-chain.md)
+- [ ] Production requirements fully pinned; lock file committed; `npm ci` not `npm install` · [§12](docs/12-supply-chain.md)
+- [ ] No `curl | bash` — download, read, then run · [§12](docs/12-supply-chain.md)
+- [ ] Nothing installed with `sudo pip`; each service has its own venv and unprivileged user · [§12](docs/12-supply-chain.md)
+- [ ] Understood that a clean `pip-audit` / `npm audit` means "nothing known against it", not "safe" · [§12](docs/12-supply-chain.md)
+
 ## Network
 - [ ] Firewall policy is **default-deny** inbound — `iptables -S INPUT | head -1` → `DROP` · [§2](docs/02-firewall.md)
 - [ ] Only intended ports open; each one justified · [§2](docs/02-firewall.md)
